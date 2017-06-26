@@ -60,17 +60,17 @@
 <body>
     <div id="container">
         <div id="namesWrapper">
-            <h2>ChatIO</h2>
+            <h2>BBNB ChatIO</h2>
             <p>Create Username</p>
             <div id="error">
-                
+
             </div>
             <form id="usernameForm">
                 <input type="text" size=35 id="username">
                 <input type="submit" value="Submit">
             </form>
         </div>
-        
+
         <div id="mainWrapper">
             <h2>ChatIO</h2>
             <div id="chatWrapper">
@@ -80,13 +80,13 @@
                     <input type="submit" value="Submit">
                 </form>
             </div>
-            
+
             <div id="userWrapper">
                 <div id="users"></div>
             </div>
         </div>
     </div>
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
     <script>
@@ -99,7 +99,7 @@
             var $users = $('#users');
             var $username = $('#username');
             var $error = $('#error');
-            
+
             $usernameForm.submit(function(e){
                 e.preventDefault();
                 socket.emit('new user', $username.val(), function(data){
@@ -111,7 +111,7 @@
                     }
                 });
             });
-            
+
             socket.on('usernames', function(data){
                 var html = '';
                 for(i=0;i < data.length;i++){
@@ -119,13 +119,13 @@
                 }
                 $users.html(html);
             });
-            
+
             $messageForm.submit(function(e){
                 e.preventDefault();
                 socket.emit('send message', $message.val());
                 $message.val('');
             });
-            
+
             socket.on('new message',function(data){
                 $chat.append('<strong>'+data.user+'</strong>: '+data.msg+'<br>');
             });
